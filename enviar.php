@@ -10,6 +10,8 @@ function validar_campo($campo){
 }
 
 
+header('Content-type:application/json');
+
 if (isset($_POST["nombre"]) && !empty($_POST["nombre"]) &&
 	isset($_POST["correo"]) && !empty($_POST["correo"]) &&
 	isset($_POST["mensaje"]) && !empty($_POST["mensaje"])) {
@@ -32,7 +34,10 @@ if (isset($_POST["nombre"]) && !empty($_POST["nombre"]) &&
 
 	mail($destinoMail,"Mensaje de contacto del cliente".$nombre, $contenido);
 
-	return print("Ok");
+	//Lo cambiamos por un estado en lugar de un mensaje
+	//return print("Ok");
+	return print(json_encode('ok'));
 }
 
-return print("No se puede enviar");
+	return print(json_encode('no'));
+	//return print("No se puede enviar");
